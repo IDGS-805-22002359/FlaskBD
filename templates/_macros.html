@@ -1,0 +1,19 @@
+{%macro input(name, placeholer, required, type="text")%}
+
+<p>
+    <label for="{{name}}">{{name}}</label>
+    <input type="{{type}}" name="{{name}}" placeholder="{{placeholer}}" required="{{required}}" class="form-control" />
+</p>
+
+{%endmacro%}
+
+{%macro campo(field)%}
+<td class="form-label">{{field.label}}</td>
+<dd>{{field(**kwargs)|safe}}</dd>
+
+{%if field.errors%}
+{%for error in field.errors%}
+<p class="text-danger">{{error}}</p>
+{%endfor%}
+{%endif%}
+{%endmacro%}

@@ -1,19 +1,12 @@
-{%macro input(name, placeholer, required, type="text")%}
+{% macro campo(field) %}
+<div class="mb-4">
+    <label for="{{ field.id }}" class="block text-sm font-medium text-gray-900">{{ field.label.text }}</label>
+    {{ field(class_="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm") }}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endmacro %}
 
-<p>
-    <label for="{{name}}">{{name}}</label>
-    <input type="{{type}}" name="{{name}}" placeholder="{{placeholer}}" required="{{required}}" class="form-control" />
-</p>
-
-{%endmacro%}
-
-{%macro campo(field)%}
-<td class="form-label">{{field.label}}</td>
-<dd>{{field(**kwargs)|safe}}</dd>
-
-{%if field.errors%}
-{%for error in field.errors%}
-<p class="text-danger">{{error}}</p>
-{%endfor%}
-{%endif%}
-{%endmacro%}
